@@ -1,21 +1,28 @@
 'use strict'
 
+/**
+ * 倒數計時器，onComplete onChange兩個hoock
+ * @param {*} time 倒數的時間
+ */
 var timeclock = function (time) {
-  var _time = time || 60000
+  var _time = 0
   var _change_cbs = []
   var _complete_cbs = []
   var _during_time = 0
 
-  var _interval = setInterval(() => {
-    if (_time <= 0) {
-      clearInterval(_interval)
-      emitComplete()
-    } else {
-      _time -= 1000
-      _during_time += 1000
-      emitChange(_during_time)
-    }
-  }, 1000)
+  var start = function (time) {
+    _time = time
+    var _interval = setInterval(() => {
+      if (_time <= 0) {
+        clearInterval(_interval)
+        emitComplete()
+      } else {
+        _time -= 1000
+        _during_time += 1000
+        emitChange(_during_time)
+      }
+    }, 1000)
+  }
 
   var onComplete = function (cb) {
     if (typeof cb !== 'function') { throw new Error('NOT FUNCTION TYPE') }
@@ -37,7 +44,8 @@ var timeclock = function (time) {
 
   return {
     onComplete,
-    onChange
+    onChange,
+    start
   }
 }
 
