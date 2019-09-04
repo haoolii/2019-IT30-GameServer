@@ -1,0 +1,25 @@
+{
+  "name": "2019-IT30-GameServer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": {
+    "2019-IT30-GameServer": "www.js"
+  },
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unnhao/2019-IT30-GameServer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/unnhao/2019-IT30-GameServer/issues"
+  },
+  "homepage": "https://github.com/unnhao/2019-IT30-GameServer#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
