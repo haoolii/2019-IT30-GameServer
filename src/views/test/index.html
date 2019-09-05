@@ -2,14 +2,55 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TEST</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>TEST</title>
 </head>
 
 <body>
 
+  <div id="app">
+    <ul>
+      <li v-for="(msg, index) in message" :key="index">
+        <span>{{index}}</span>
+        <span>{{msg}}} </span>
+      </li>
+    </ul>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: () => ({
+        id: 0,
+        message: [],
+        socket: {}
+      }),
+      created() {
+        console.log('create')
+        this.socket = io('http://localhost:3022')
+      },
+      mounted() {
+        console.log('mounted')
+        this.socket.on('MSG', this.onMSG)
+      },
+      beforedestroy() {
+        this.socket.removeListener('MSG', this.onMSG)
+      },
+      methods: {
+        emit(CMD, MSG) {
+          this.socket.emit(CMD, MSG)
+        },
+        onMSG(payload) {
+          console.log(`onMSG ${JSON.stringify(payload)}`)
+          this.message.push(payload)
+        }
+      }
+    })
+  </script>
 </body>
 
 </html>
