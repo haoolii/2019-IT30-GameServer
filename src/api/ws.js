@@ -8,8 +8,8 @@ var ws = function (http) {
     // }, 500)
   })
 
-  http.listen(3022, function () {
-    console.log('Socket listening on *:3022');
+  http.listen( process.env.PORT || 3022, function () {
+    console.log('Socket listening on *:process.env.PORT');
   })
 }
 module.exports = ws
