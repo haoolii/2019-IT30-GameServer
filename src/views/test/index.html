@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>TEST</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <div>
+      <h3>秒數{{countdown}}</h3>
+    </div>
+    <ul>
+      <li v-for="(msg, index) in message" :key="index">
+        <span>{{index}}</span>
+        <span>{{msg}}} </span>
+      </li>
+    </ul>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: () => ({
+        id: 0,
+        message: [],
+        socket: {},
+        countdown: 0
+      }),
+      created() {
+        console.log('create')
+        this.socket = io({
+          query: {
+            token: 'token'
+          }
+        })
+      },
+      mounted() {
+        console.log('mounted')
+        this.socket.on('MSG', this.onMSG)
+      },
+      beforedestroy() {
+        this.socket.removeListener('MSG', this.onMSG)
+      },
+      methods: {
+        emit(CMD, MSG) {
+          this.socket.emit(CMD, MSG)
+        },
+        onMSG(payload) {
+          console.log(`onMSG ${JSON.stringify(payload)}`)
+          this.message.push(payload)
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
