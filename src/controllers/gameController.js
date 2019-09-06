@@ -5,7 +5,7 @@ const { notify } = require('../deliveries')
 const wsController = require('./wsController')
 const dbController = require('./dbController')
 const userController = require('./userController')
-
+const jwt = require('jsonwebtoken')
 
 var gameController = function (game, wsc) {
   this.game = game
@@ -37,6 +37,13 @@ var gameController = function (game, wsc) {
 
   this.mounted = function () {
     // this.game.startGame()
+    var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE1Njc3NDY5MTN9.dIdq6iQmKXwL_zO4FF4aUOvXDzACemmM2K1sZnrn2uXg'
+    console.log('test')
+    try {
+      var decoded = jwt.verify(token, '878787');
+    } catch (err) {
+      console.log(err.message)
+    }
   }
 
   var _process = function () {

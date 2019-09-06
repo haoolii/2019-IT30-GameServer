@@ -19,7 +19,7 @@ var wsController = function (ws) {
       this.emit('onConnected', socket)
     })
   }
-
-  this.mounted()
+  console.log('wsController !!!')
+  // this.mounted()
 }
 module.exports = wsController

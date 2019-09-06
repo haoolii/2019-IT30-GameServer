@@ -1,5 +1,6 @@
 const config = require('../config')
 const { User } = require('../models')
+const jwt = require('jsonwebtoken')
 
 var userController = function (wsController, dbController) {
   this.wsController = wsController
@@ -16,6 +17,11 @@ var userController = function (wsController, dbController) {
     })
   }
 
+
+  // var token = jwt.sign({ foo: 'bar' }, '878787')
+  // console.log(token)
+
   this.mounted()
+  console.log('mounteddd')
 }
 module.exports = userController

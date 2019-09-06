@@ -1,7 +1,8 @@
-var { gameController, wsController} = require('./controllers')
+var { gameController} = require('./controllers')
 var { Game } = require('./core')
 var game = function (ws) {
-  new gameController(new Game(), ws)
+  console.log('!!!')
+  new gameController(new Game())
 }
 
 module.exports = game
